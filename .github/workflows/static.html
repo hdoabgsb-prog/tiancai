@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <title>内嵌百度</title>
+
+  <!-- 分享卡片用的 og 标签（微信/QQ 转发时显示这些） -->
+  <meta name="description" content="内嵌百度练手页">
+  <meta property="og:title" content="内嵌百度">
+  <meta property="og:description" content="内嵌百度练手页">
+  <meta property="og:type" content="website">
+
+  <style>
+    /* 三行关键样式：让 iframe 铺满整屏，去掉边框和滚动条 */
+    html,body{margin:0;width:100%;height:100%;background:#000;overflow:hidden}
+    #frame{display:block;width:100%;height:100%;border:0}
+
+    /* 加载提示层，iframe 加载完自动淡出 */
+    #loading{
+      position:fixed;inset:0;z-index:9;display:grid;place-items:center;
+      background:#000;color:#9aa4b2;
+      font:15px/1.6 system-ui,-apple-system,"PingFang SC",sans-serif;
+      transition:opacity .25s ease;
+    }
+    #loading.hide{opacity:0;pointer-events:none}
+  </style>
+</head>
+<body>
+
+  <div id="loading">正在加载…</div>
+
+  <iframe id="frame"
+          src="https://www.baidu.com/"
+          allow="autoplay; fullscreen"
+          allowfullscreen
+          referrerpolicy="origin"></iframe>
+
+  <script>
+    var frame = document.getElementById('frame');
+    var loading = document.getElementById('loading');
+
+    frame.addEventListener('load', function () {
+      loading.classList.add('hide');
+    });
+
+    setTimeout(function () {
+      if (!loading.classList.contains('hide')) {
+        loading.textContent = '加载较慢，请检查网络';
+      }
+    }, 8000);
+  </script>
+
+</body>
+</html>
